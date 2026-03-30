@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 import Read from './components/Read.jsx'
 import Add from "./components/Add.jsx"
 
@@ -13,6 +14,7 @@ function App() {
 
 return (
   <>
+  <ToastContainer/>
   <Read userData={userData} setuserData={setuserData}></Read>
   <Add setuserData={setuserData} userData={userData}></Add>
   

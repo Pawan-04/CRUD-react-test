@@ -1,4 +1,4 @@
-
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form"
 
 function Add(props){
@@ -13,8 +13,10 @@ function Add(props){
     function submitForm(data){
         props.setuserData((prev)=> [...prev,{name:data.userName,age:data.userAge}])
         reset();
+        toast.success("Form submitted successfully")
     }
     
+
 
     return(
         <>
