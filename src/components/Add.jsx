@@ -1,22 +1,27 @@
-import {useState} from "react"
+
+import { useForm } from "react-hook-form"
 
 function Add(props){
-    const [readInput,writeInput] = useState()
-    const [readAge,writeAge] = useState()
-
-    function submitForm(e){
-        e.preventDefault()
-        props.setuserData((prev)=>[...prev,{name:readInput,age:readAge}])
+    const {register,
+        handleSubmit,
+        reset,
+        formState: {errors}
         
+    } = useForm()
+    
+
+    function submitForm(data){
+        props.setuserData((prev)=> [...prev,{name:data.userName,age:data.userAge}])
+        reset();
     }
-    // console.log(readInput,"--->",readAge)
-    // console.log(props.userData)
+    
 
     return(
         <>
-        <form onSubmit={submitForm}>
-        <input onChange={(e)=>{writeInput(e.target.value)}} value={readInput} type='text'></input>
-        <input onChange={(e)=>writeAge(e.target.value)} value={readAge} type='text'></input>
+        <form onSubmit={handleSubmit(submitForm)}>
+        <input {...register('userName',{required:true})}></input>
+        {errors.userName && alert('User Name required')}
+        <input {...register('userAge', {required:true})}></input>
         <button>Submit</button>
         </form>
     </>
