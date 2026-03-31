@@ -1,7 +1,12 @@
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form"
+import { useContext } from 'react'
+import {contextVar} from '../Wrapper.jsx'
 
-function Add(props){
+function Add(){
+
+    const[userData,setuserData] = useContext(contextVar)
+
     const {register,
         handleSubmit,
         reset,
@@ -11,7 +16,9 @@ function Add(props){
     
 
     function submitForm(data){
-        props.setuserData((prev)=> [...prev,{name:data.userName,age:data.userAge}])
+        console.log(data)
+        const addData = [...userData,{name:data.userName,age:data.userAge}]
+        setuserData(addData)
         reset();
         toast.success("Form submitted successfully")
     }
